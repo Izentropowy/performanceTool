@@ -1,0 +1,72 @@
+
+body {
+    background-image: url(images/clouds.avif);
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat; 
+    background-size: cover;
+    padding-bottom: 150px;
+}
+
+button {
+    background: none;
+    border: none;
+	padding: 0;
+}
+
+.navbar img {
+    width: 25px;
+}
+
+.plane-photo {
+    aspect-ratio: 1 / 1;
+    width: 20%;
+    border-radius: 50%;
+    border: 2px solid rgba(27, 27, 30, 0.3);
+    opacity: 0.65;
+}
+
+footer img {
+    border-radius: 50%;
+}
+
+.footer-text {
+    max-width: 80%;
+}
+
+.warning {
+    margin-bottom: 120px;
+}
+
+.dropdown-full {
+    width: 75%;
+}
+
+.dropdown-half {
+    width: 25.1%;
+}
+
+.input-title {
+    width: 25%;
+    font-size: smaller;
+}
+
+.container{
+    max-width: 800px;
+}
+
+.invalid{
+    border: 1px solid rgba(255, 0, 0);
+}
+
+.shake{
+    animation: shake 0.5s;
+}
+
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+  }
