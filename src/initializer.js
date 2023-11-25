@@ -3,6 +3,13 @@ import fbImgPath from "/src/assets/images/fb-removebg-preview.png";
 import igImgPath from "/src/assets/images/ig.png";
 import cklImgPath from "/src/assets/images/ckl.png";
 
+import createHome from "./home";
+import createWb from "./wb";
+import createDeparture from "./departure";
+import createEnroute from "./enroute";
+import createDestination from "./destination";
+import createFuel from "./fuel";
+
 function createNav() {
     const nav = document.createElement('nav');
     nav.classList.add("navbar", "navbar-expand-md", "navbar-dark", "bg-dark", "py-4", "mb-md-4");
@@ -35,26 +42,30 @@ function createNav() {
     homeImg.src = homeImgPath;
     homeButton.appendChild(homeImg);
 
+    homeButton.onclick = () => setActivePage(createHome());
+
     // Create buttons
     const buttons = [
-        { id: "wbButton", text: "Weight And Balance" },
-        { id: "departureButton", text: "Departure" },
-        { id: "enrouteButton", text: "En-Route" },
-        { id: "destinationButton", text: "Destination" },
-        { id: "fuelButton", text: "Fuel" }
+        { id: "wbButton", text: "Weight And Balance", action: () => setActivePage(createWb()) },
+        { id: "departureButton", text: "Departure", action: () => setActivePage(createDeparture()) },
+        { id: "enrouteButton", text: "En-Route", action: () => setActivePage(createEnroute()) },
+        { id: "destinationButton", text: "Destination", action: () => setActivePage(createDestination()) },
+        { id: "fuelButton", text: "Fuel", action: () => setActivePage(createFuel()) }
     ];
 
-    buttons.forEach(buttonInfo => {
+    buttons.forEach(button => {
         const navItem = document.createElement('li');
         navItem.classList.add("nav-item");
 
         const navButton = document.createElement('button');
-        navButton.id = buttonInfo.id;
+        navButton.id = button.id;
         navButton.classList.add("nav-link", "btn");
-        navButton.textContent = buttonInfo.text;
+        navButton.textContent = button.text;
 
         navItem.appendChild(navButton);
         navbarNav.appendChild(navItem);
+
+        navButton.onclick = () => button.action();
     });
 
     // Append all elements to build the structure
@@ -63,10 +74,6 @@ function createNav() {
     containerFluid.appendChild(navbarCollapse);
     navbarCollapse.appendChild(navbarNav);
     nav.appendChild(containerFluid);
-
-    // homeButton.onclick = () => setActivePage(createHome());
-    // menuButton.onclick = () => setActivePage(createMenu());
-    // contactButton.onclick = () => setActivePage(createContact());
 
     return nav
 }
@@ -142,6 +149,7 @@ function initializeWebsite() {
     content.appendChild(createMain());
     content.appendChild(createFooter());
 
+    setActivePage(createHome());
 }
 
 export default initializeWebsite;
