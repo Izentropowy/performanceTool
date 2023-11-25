@@ -1,24 +1,8 @@
 function createWb() {
-    // Create container for the title
-    const titleContainer = document.createElement('div');
-    titleContainer.classList.add('container-fluid');
+    const titleContainer = createTitle('Weight and Balance');
 
-    // Create the row with the title
-    const titleRow = document.createElement('div');
-    titleRow.classList.add('row');
+    const inputContainer = createInputContainer();
 
-    const title = document.createElement('p');
-    title.classList.add('display-5', 'text-center', 'fw-normal', 'title');
-    title.textContent = 'Weight and Balance';
-
-    titleRow.appendChild(title);
-    titleContainer.appendChild(titleRow);
-
-    // Create container for the input groups
-    const inputContainer = document.createElement('div');
-    inputContainer.classList.add('container', 'settings', 'mb-5');
-
-    // Create individual input groups
     const blockFuelInput = createInput('Block Fuel', 'l', 'block-fuel');
     const row1Input = createInput('Row 1', 'kg', 'row-1',);
     const row2Input = createInput('Row 2', 'kg', 'row-2',);
@@ -33,11 +17,45 @@ function createWb() {
     inputContainer.appendChild(group2);
     inputContainer.appendChild(group3);
 
-    // Create container for the card and results
+    const resultContainer = createResultContainer(true);
+
+    // Create the main container to hold all sections
+    const mainContainer = document.createElement('div');
+    mainContainer.appendChild(titleContainer);
+    mainContainer.appendChild(inputContainer);
+    mainContainer.appendChild(resultContainer);
+
+    return mainContainer
+}
+
+export function createTitle(title) {
+    const titleContainer = document.createElement('div');
+    titleContainer.classList.add('container-fluid');
+
+    const row = document.createElement('div');
+    row.classList.add('row');
+
+    const para = document.createElement('p');
+    para.classList.add('display-5', 'text-center', 'fw-normal', 'title');
+    para.textContent = title;
+
+    row.appendChild(para);
+    titleContainer.appendChild(row);
+    
+    return titleContainer;
+}
+
+export function createInputContainer() {
+    const inputContainer = document.createElement('div');
+    inputContainer.classList.add('container', 'settings', 'mb-5');
+
+    return inputContainer;
+}
+
+export function createResultContainer(chart) {
     const resultContainer = document.createElement('div');
     resultContainer.classList.add('container');
 
-    // Create the card with results
     const card = document.createElement('div');
     card.classList.add('card');
 
@@ -57,29 +75,25 @@ function createWb() {
     table.appendChild(towRow);
     table.appendChild(momentRow);
 
-    const canvasDiv = document.createElement('div');
-    const canvas = document.createElement('canvas');
-    canvas.id = 'myChart';
-
-    canvasDiv.appendChild(canvas);
-
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(table);
-    cardBody.appendChild(canvasDiv);
     card.appendChild(cardBody);
+
+    if (chart) {
+        const canvasDiv = document.createElement('div');
+        const canvas = document.createElement('canvas');
+        canvas.id = 'myChart';
+    
+        canvasDiv.appendChild(canvas);
+        cardBody.appendChild(canvasDiv);
+    }
 
     resultContainer.appendChild(card);
 
-    // Create the main container to hold all sections
-    const mainContainer = document.createElement('div');
-    mainContainer.appendChild(titleContainer);
-    mainContainer.appendChild(inputContainer);
-    mainContainer.appendChild(resultContainer);
-
-    return mainContainer
+    return resultContainer;
 }
 
-function createInput(title, placeholder, id) {
+export function createInput(title, placeholder, id) {
     const div = document.createElement('div');
     div.classList.add('input-group-text', 'input-title');
     div.textContent = title;
@@ -93,7 +107,7 @@ function createInput(title, placeholder, id) {
     return [div, input];
 }
 
-function createInputGroup(...inputs) {
+export function createInputGroup(...inputs) {
     const inputGroup = document.createElement('div');
     inputGroup.classList.add('input-group');
 
@@ -104,7 +118,7 @@ function createInputGroup(...inputs) {
     return inputGroup;
 }
 
-function createTableRow(thText) {
+export function createTableRow(thText) {
     const row = document.createElement('tr');
 
     const th = document.createElement('th');
@@ -117,6 +131,22 @@ function createTableRow(thText) {
     row.appendChild(td);
 
     return row;
+}
+
+export function createCalculateButton() {
+        // Create the button container
+        const buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('container', 'mb-3', 'd-flex', 'justify-content-center');
+    
+        // Create the button
+        const calculateButton = document.createElement('button');
+        calculateButton.type = 'button';
+        calculateButton.classList.add('btn', 'btn-primary');
+        calculateButton.textContent = 'Calculate';
+
+        buttonContainer.appendChild(calculateButton);
+
+        return buttonContainer;
 }
 
 export default createWb;
