@@ -132,7 +132,7 @@ export function createInputGroup(...inputs) {
     return inputGroup;
 }
 
-export function createTableRow(thText) {
+function createTableRow(thText) {
     const row = document.createElement('tr');
 
     const th = document.createElement('th');

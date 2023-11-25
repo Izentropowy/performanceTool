@@ -3,7 +3,6 @@ import { createInput } from "./wb";
 import { createInputContainer } from "./wb";
 import { createInputGroup } from "./wb";
 import { createResultContainer } from "./wb";
-import { createTableRow } from "./wb";
 import { createTitle } from "./wb";
 import { createDropdownInput } from "./wb";
 
