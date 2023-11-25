@@ -9,15 +9,20 @@ function createWb() {
     const baggage1Input = createInput('Baggage 1', 'kg', 'baggage-1');
     const baggage2Input = createInput('Baggage 2', 'kg', 'baggage-2');
 
-    const group1 = createInputGroup(blockFuelInput[0], blockFuelInput[1]);
-    const group2 = createInputGroup(row1Input[0], row1Input[1], row2Input[0], row2Input[1]);
-    const group3 = createInputGroup(baggage1Input[0], baggage1Input[1], baggage2Input[0], baggage2Input[1]);
+    const group1 = createInputGroup(...blockFuelInput);
+    const group2 = createInputGroup(...row1Input, ...row2Input);
+    const group3 = createInputGroup(...baggage1Input, ...baggage2Input);
 
     inputContainer.appendChild(group1);
     inputContainer.appendChild(group2);
     inputContainer.appendChild(group3);
 
-    const resultContainer = createResultContainer(true);
+    const tableRows = [
+        { label: 'TOW', id: 'tow' },
+        { label: 'Moment', id: 'moment' },
+    ];
+
+    const resultContainer = createResultContainer(tableRows, true);
 
     // Create the main container to hold all sections
     const mainContainer = document.createElement('div');
@@ -52,7 +57,7 @@ export function createInputContainer() {
     return inputContainer;
 }
 
-export function createResultContainer(chart) {
+export function createResultContainer(tableRows, chart) {
     const resultContainer = document.createElement('div');
     resultContainer.classList.add('container');
 
@@ -69,11 +74,11 @@ export function createResultContainer(chart) {
     const table = document.createElement('table');
     table.classList.add('table');
 
-    const towRow = createTableRow('TOW', 'tow');
-    const momentRow = createTableRow('Moment', 'moment');
-
-    table.appendChild(towRow);
-    table.appendChild(momentRow);
+    // Create table rows based on the provided array
+    tableRows.forEach(rowData => {
+        const row = createTableRow(rowData.label, rowData.id);
+        table.appendChild(row);
+    });
 
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(table);
@@ -93,7 +98,7 @@ export function createResultContainer(chart) {
     return resultContainer;
 }
 
-export function createInput(title, placeholder, id) {
+export function createInput(title, placeholder, id, min = undefined, max = undefined) {
     const div = document.createElement('div');
     div.classList.add('input-group-text', 'input-title');
     div.textContent = title;
@@ -103,6 +108,15 @@ export function createInput(title, placeholder, id) {
     input.classList.add('form-control');
     input.id = id;
     input.placeholder = placeholder;
+
+    // Set min and max attributes if provided
+    if (min !== undefined) {
+        input.min = min;
+    }
+
+    if (max !== undefined) {
+        input.max = max;
+    }
 
     return [div, input];
 }
@@ -147,6 +161,33 @@ export function createCalculateButton() {
         buttonContainer.appendChild(calculateButton);
 
         return buttonContainer;
+}
+
+export function createDropdownInput(title, options, id) {
+    // Create the title div
+    const titleDiv = document.createElement('div');
+    titleDiv.classList.add('input-group-text', 'input-title');
+    titleDiv.textContent = title;
+
+    // Create the form group div with the dropdown
+    const formGroupDiv = document.createElement('div');
+    formGroupDiv.classList.add('form-group', 'dropdown-half');
+
+    const select = document.createElement('select');
+    select.classList.add('form-control');
+    select.id = id;
+
+    // Add options to the dropdown
+    options.forEach(optionText => {
+        const option = document.createElement('option');
+        option.textContent = optionText;
+        select.appendChild(option);
+    });
+
+    // Append the select element to the form group div
+    formGroupDiv.appendChild(select);
+
+    return [titleDiv, formGroupDiv];
 }
 
 export default createWb;
