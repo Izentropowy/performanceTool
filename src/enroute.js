@@ -13,9 +13,10 @@ function createEnroute() {
 
     const mcpDropdown = createDropdownInput('MCP', ['max', '75%', '65%', '55%', '45%', 'min'], 'mcp');
     const qnhInput = createInput('QNH', 'hPa', 'qnh', 950, 1050);
-    const cruiseInput = createInput('Cruise', 'ft', 'cruise', 2000, 15000);
+    const cruiseInput = createCruiseGroup();
     const isaDevInput = createInput('ISA dev', '°C', 'dev', -20, 20);
     
+
     const group1 = createInputGroup(...mcpDropdown, ...qnhInput);
     const group2 = createInputGroup(...cruiseInput, ...isaDevInput);
 
@@ -43,6 +44,47 @@ function createEnroute() {
     mainContainer.appendChild(resultContainer);
 
     return mainContainer;
+}
+function createCruiseGroup() {
+    // Create the title div
+    const titleDiv = document.createElement('div');
+    titleDiv.classList.add('input-group-text', 'input-title');
+    titleDiv.textContent = 'Cruise';
+
+    // Create the cruise group div
+    const cruiseGroupDiv = document.createElement('div');
+    cruiseGroupDiv.classList.add('cruise-group');
+
+    // Create the input element
+    const cruiseInput = document.createElement('input');
+    cruiseInput.type = 'number';
+    cruiseInput.classList.add('form-control');
+    cruiseInput.placeholder = 'ft';
+    cruiseInput.id = 'cruise';
+    cruiseInput.min = '2000';
+    cruiseInput.max = '15000';
+
+    // Create the select element
+    const isFLSelect = document.createElement('select');
+    isFLSelect.classList.add('form-control');
+    isFLSelect.id = 'isFL';
+
+    // Create and add options to the select element
+    const altitudeOption = document.createElement('option');
+    altitudeOption.textContent = 'altitude';
+
+    const flightLevelOption = document.createElement('option');
+    flightLevelOption.textContent = 'flight level';
+
+    isFLSelect.appendChild(altitudeOption);
+    isFLSelect.appendChild(flightLevelOption);
+
+    // Append the input and select elements to the cruise group div
+    cruiseGroupDiv.appendChild(cruiseInput);
+    cruiseGroupDiv.appendChild(isFLSelect);
+
+    // Return an array containing the title div and the cruise group div
+    return [titleDiv, cruiseGroupDiv];
 }
 
 export default createEnroute;

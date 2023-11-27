@@ -63,6 +63,11 @@ footer img {
     animation: shake 0.5s;
 }
 
+.cruise-group {
+    display: flex;
+    width: 25%;
+}
+
 @keyframes shake {
     0% { transform: translateX(0); }
     10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }

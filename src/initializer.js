@@ -11,6 +11,9 @@ import createDestination from "./destination";
 import createFuel from "./fuel";
 
 import wbCalc from "./wbCalc";
+import { depCalc } from "./departureEvents";
+import { routeCalc } from "./en-routeEvents";
+import { destCalc } from "./destinationEvents";
 
 function createNav() {
     const nav = document.createElement('nav');
@@ -49,9 +52,9 @@ function createNav() {
     // Create buttons
     const buttons = [
         { id: "wbButton", text: "Weight And Balance", action: () => setActivePage(createWb(), wbCalc) },
-        { id: "departureButton", text: "Departure", action: () => setActivePage(createDeparture()) },
-        { id: "enrouteButton", text: "En-Route", action: () => setActivePage(createEnroute()) },
-        { id: "destinationButton", text: "Destination", action: () => setActivePage(createDestination()) },
+        { id: "departureButton", text: "Departure", action: () => setActivePage(createDeparture(), depCalc) },
+        { id: "enrouteButton", text: "En-Route", action: () => setActivePage(createEnroute(), routeCalc) },
+        { id: "destinationButton", text: "Destination", action: () => setActivePage(createDestination(), destCalc) },
         { id: "fuelButton", text: "Fuel", action: () => setActivePage(createFuel()) }
     ];
 
@@ -61,7 +64,7 @@ function createNav() {
 
         const navButton = document.createElement('button');
         navButton.id = button.id;
-        navButton.classList.add("nav-link", "btn");
+        navButton.classList.add("nav-link");
         navButton.textContent = button.text;
 
         navItem.appendChild(navButton);
