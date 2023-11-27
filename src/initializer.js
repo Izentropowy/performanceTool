@@ -10,6 +10,8 @@ import createEnroute from "./enroute";
 import createDestination from "./destination";
 import createFuel from "./fuel";
 
+import wbCalc from "./wbCalc";
+
 function createNav() {
     const nav = document.createElement('nav');
     nav.classList.add("navbar", "navbar-expand-md", "navbar-dark", "bg-dark", "py-4", "mb-md-4");
@@ -46,7 +48,7 @@ function createNav() {
 
     // Create buttons
     const buttons = [
-        { id: "wbButton", text: "Weight And Balance", action: () => setActivePage(createWb()) },
+        { id: "wbButton", text: "Weight And Balance", action: () => setActivePage(createWb(), wbCalc) },
         { id: "departureButton", text: "Departure", action: () => setActivePage(createDeparture()) },
         { id: "enrouteButton", text: "En-Route", action: () => setActivePage(createEnroute()) },
         { id: "destinationButton", text: "Destination", action: () => setActivePage(createDestination()) },
@@ -136,20 +138,24 @@ function createFooter() {
     return footer
 }
 
-function setActivePage(page) {
+function setActivePage(page, calc) {
     const main = document.querySelector('main');
     main.innerHTML = '';
     main.appendChild(page);
+
+    if (calc) {
+        calc();
+    }
 }
 
 function initializeWebsite() {
-    const content = document.getElementById('content');
+        const content = document.getElementById('content');
 
-    content.appendChild(createNav());
-    content.appendChild(createMain());
-    content.appendChild(createFooter());
+        content.appendChild(createNav());
+        content.appendChild(createMain());
+        content.appendChild(createFooter());
 
-    setActivePage(createHome());
+        setActivePage(createHome());
 }
 
 export default initializeWebsite;

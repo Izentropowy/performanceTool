@@ -52,7 +52,7 @@ export function createTitle(title) {
 
 export function createInputContainer() {
     const inputContainer = document.createElement('div');
-    inputContainer.classList.add('container', 'settings', 'mb-5');
+    inputContainer.classList.add('container', 'mb-3');
 
     return inputContainer;
 }
@@ -72,7 +72,7 @@ export function createResultContainer(tableRows, chart) {
     cardTitle.textContent = 'Results';
 
     const table = document.createElement('table');
-    table.classList.add('table');
+    table.classList.add('table', 'bg-light');
 
     // Create table rows based on the provided array
     tableRows.forEach(rowData => {
@@ -132,14 +132,18 @@ export function createInputGroup(...inputs) {
     return inputGroup;
 }
 
-function createTableRow(thText) {
+function createTableRow(title, id) {
     const row = document.createElement('tr');
 
     const th = document.createElement('th');
-    th.textContent = thText;
+    th.textContent = title;
 
     const td = document.createElement('th');
     td.textContent = '0';
+    td.id = id;
+
+    td.classList.add("border", "p-2");
+    th.classList.add("border", "p-2");
 
     row.appendChild(th);
     row.appendChild(td);
