@@ -25,24 +25,27 @@ export const fuelCalc = () => {
         let contingencyResult = calcContingency(tripResult, fuelBurn);
         let alternateResult = calcAlternate(alternate.value, fuelBurn);
         let reserveResult = calcReserve(rules.value, fuelBurn);
-        let minimum = taxiResult + tripResult + contingencyResult + alternateResult + reserveResult;
+        let minimum = parseFloat(taxiResult) + parseFloat(tripResult) + parseFloat(contingencyResult) + parseFloat(alternateResult) + parseFloat(reserveResult);
 
-        return [taxiResult.toFixed(2), tripResult.toFixed(2), contingencyResult.toFixed(2), alternateResult.toFixed(2), reserveResult.toFixed(2), minimum.toFixed(2)];
+        results.updateTaxi(taxiResult);
+        results.updateTrip(tripResult);
+        results.updateContingency(contingencyResult);
+        results.updateAlternate(alternateResult);
+        results.updateReserve(reserveResult);
+        results.updateMinimum(minimum);
     }
     
     function updateResults(){
-        let results = calcAll();
-        taxiResult.textContent = results[0] + ' l';
-        tripResult.textContent = results[1] + ' l';
-        contingencyResult.textContent = results[2] + ' l';
-        alternateResult.textContent = results[3] + ' l';
-        reserveResult.textContent = results[4] + ' l';
-        minimumResult.textContent = results[5] + ' l';
+        calcAll();
+        taxiResult.textContent = results.getTaxi() + ' l';
+        tripResult.textContent = results.getTrip() + ' l';
+        contingencyResult.textContent = results.getContingency() + ' l';
+        alternateResult.textContent = results.getAlternate() + ' l';
+        reserveResult.textContent = results.getReserve() + ' l';
+        minimumResult.textContent = results.getMinimum() + ' l';
     }
     
-    
     button.addEventListener('click', () => {
-        console.log(results.getFuelBurn());
         updateResults();
     });
 }

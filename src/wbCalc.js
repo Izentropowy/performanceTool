@@ -1,4 +1,5 @@
 import Chart from 'chart.js/auto';
+import { results } from './results';
 
 
 const wbCalc = () => {
@@ -54,8 +55,10 @@ const wbCalc = () => {
         let fuel = calcFuelMass(blockFuel.value);
         let m = calcMoment(fuel, row1.value, row2.value, baggage1.value, baggage2.value);
         let w = calcWeight(fuel, row1.value, row2.value, baggage1.value, baggage2.value);
-        takeoffWeight.textContent = w + ' kg';
-        moment.textContent = m + ' kgm';
+        results.updateTow(w);
+        results.updateMoment(m);
+        takeoffWeight.textContent = results.getTow() + ' kg';
+        moment.textContent = results.getMoment() + ' kgm';
         updateChart(m, w);
     }
     

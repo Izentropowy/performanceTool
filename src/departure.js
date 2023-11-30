@@ -6,6 +6,8 @@ import { createResultContainer } from "./wb";
 import { createTitle } from "./wb";
 import { createDropdownInput } from "./wb";
 
+import { results } from "./results";
+
 function createDeparture() {
     const titleContainer = createTitle('Departure');
 
@@ -34,12 +36,12 @@ function createDeparture() {
     const calculateButton = createCalculateButton();
 
     const tableRows = [
-        { label: 'Takeoff Run', id: 'tor' },
-        { label: 'Takeoff Distance', id: 'tod' },
-        { label: 'Rate of Climb', id: 'roc' },
-        { label: 'Time to Top of Climb', id: 'time' },
-        { label: 'Distance to Top of Climb', id: 'distance' },
-        { label: 'Fuel Burn to Top of Climb', id: 'fuel' }
+        { label: 'Takeoff Run', id: 'tor', result: results.getTor() + ' m'},
+        { label: 'Takeoff Distance', id: 'tod', result: results.getTod() + ' m'},
+        { label: 'Rate of Climb', id: 'roc', result: results.getRoc() + ' fpm'},
+        { label: 'Time to Top of Climb', id: 'time', result: results.getTimeToc() + ' min'},
+        { label: 'Distance to Top of Climb', id: 'distance', result: results.getDistanceToc() + ' m'},
+        { label: 'Fuel Burn to Top of Climb', id: 'fuel', result: results.getFuelToc() + ' l'}
     ];
 
     const resultContainer = createResultContainer(tableRows, false);

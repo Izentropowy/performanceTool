@@ -6,6 +6,8 @@ import { createResultContainer } from "./wb";
 import { createTitle } from "./wb";
 import { createDropdownInput } from "./wb";
 
+import { results } from "./results";
+
 function createFuel() {
     const titleContainer = createTitle('Fuel');
 
@@ -25,12 +27,12 @@ function createFuel() {
     const calculateButton = createCalculateButton();
 
     const tableRows = [
-        { label: 'Taxi', id: 'taxiResult' },
-        { label: 'Trip', id: 'tripResult' },
-        { label: 'Contingency', id: 'contingencyResult' },
-        { label: 'Alternate', id: 'alternateResult' },
-        { label: 'Final reserve', id: 'reserveResult' },
-        { label: 'Minimum required', id: 'minimum' },
+        { label: 'Taxi', id: 'taxiResult', result: results.getTaxi() + ' l' },
+        { label: 'Trip', id: 'tripResult', result: results.getTrip() + ' l' },
+        { label: 'Contingency', id: 'contingencyResult', result: results.getContingency() + ' l' },
+        { label: 'Alternate', id: 'alternateResult', result: results.getAlternate() + ' l' },
+        { label: 'Final reserve', id: 'reserveResult', result: results.getReserve() + ' l' },
+        { label: 'Minimum required', id: 'minimum', result: results.getMinimum() + ' l' },
     ];
 
     const resultContainer = createResultContainer(tableRows, false);

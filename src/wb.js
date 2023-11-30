@@ -1,3 +1,5 @@
+import { results } from "./results";
+
 function createWb() {
     const titleContainer = createTitle('Weight and Balance');
 
@@ -18,8 +20,8 @@ function createWb() {
     inputContainer.appendChild(group3);
 
     const tableRows = [
-        { label: 'TOW', id: 'tow' },
-        { label: 'Moment', id: 'moment' },
+        { label: 'TOW', id: 'tow', result: results.getTow() + ' kg'},
+        { label: 'Moment', id: 'moment', result: results.getMoment() + ' kgm'},
     ];
 
     const resultContainer = createResultContainer(tableRows, true);
@@ -76,7 +78,7 @@ export function createResultContainer(tableRows, chart) {
 
     // Create table rows based on the provided array
     tableRows.forEach(rowData => {
-        const row = createTableRow(rowData.label, rowData.id);
+        const row = createTableRow(rowData.label, rowData.id, rowData.result);
         table.appendChild(row);
     });
 
@@ -132,14 +134,14 @@ export function createInputGroup(...inputs) {
     return inputGroup;
 }
 
-function createTableRow(title, id) {
+function createTableRow(title, id, result) {
     const row = document.createElement('tr');
 
     const th = document.createElement('th');
     th.textContent = title;
 
     const td = document.createElement('th');
-    td.textContent = '0';
+    td.textContent = result;
     td.id = id;
 
     td.classList.add("border", "p-2");

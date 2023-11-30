@@ -6,6 +6,8 @@ import { createResultContainer } from "./wb";
 import { createTitle } from "./wb";
 import { createDropdownInput } from "./wb";
 
+import { results } from "./results";
+
 function createDestination() {
     const titleContainer = createTitle('Destination');
 
@@ -33,8 +35,8 @@ function createDestination() {
     const calculateButton = createCalculateButton();
 
     const tableRows = [
-        { label: 'Ground Roll', id: 'ld1' },
-        { label: 'Landing Distance', id: 'ld2' },
+        { label: 'Ground Roll', id: 'ld1', result: results.getGroundRoll() + ' m' },
+        { label: 'Landing Distance', id: 'ld2', result: results.getLandingDistance() + ' m' },
     ];
 
     const resultContainer = createResultContainer(tableRows, false);

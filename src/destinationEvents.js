@@ -1,6 +1,8 @@
 import { calcLandingDistance } from './destinationCalc.js';
 import { calcPressAlt } from './departureCalc.js';
 
+import { results } from './results.js';
+
 export const destCalc = () => {
     const button = document.querySelector('.btn');
 
@@ -19,16 +21,15 @@ export const destCalc = () => {
     const variables = Array.from(document.querySelectorAll('.form-control'));
     
     function calcAll(){
-        let results = calcLandingDistance(qnh.value, elevation.value, temperature.value, windDegrees.value, windMagnitude.value, runway.value, surface.value, flaps.value);
-        let ld1 = results[0];
-        let ld2 = results[1];    
-        return [ld1, ld2];
+        let values = calcLandingDistance(qnh.value, elevation.value, temperature.value, windDegrees.value, windMagnitude.value, runway.value, surface.value, flaps.value);
+        results.updateGroundRoll(values[0]);
+        results.updateLandingDistance(values[1]);
     }
     
     function updateResults(){
-        let results = calcAll();
-        ld1.textContent = results[0] + ' m';
-        ld2.textContent = results[1] + ' m';
+        calcAll();
+        ld1.textContent = results.getGroundRoll() + ' m';
+        ld2.textContent = results.getLandingDistance() + ' m';
     }
     
     function validate(input){

@@ -1,5 +1,7 @@
 import * as departure from './departureCalc.js';
 
+import { results } from './results.js';
+
 export const depCalc = () => {
     const button = document.querySelector('.btn');
     const runway = document.getElementById('runway');
@@ -27,17 +29,23 @@ export const depCalc = () => {
         let time = departure.calcClimbTime(qnh.value, elevation.value, cruise.value, temperature.value);
         let distance = departure.calcClimbDistance(qnh.value, elevation.value, cruise.value, temperature.value);
         let fuel = departure.calcClimbFuel(qnh.value, elevation.value, cruise.value, temperature.value);
-        return [tor, tod, roc, time, distance, fuel];
+        
+        results.updateTor(tor);
+        results.updateTod(tod);
+        results.updateRoc(roc);
+        results.updateTimeToc(time);
+        results.updateDistanceToc(distance);
+        results.updateFuelToc(fuel);
     }
     
     function updateResults(){
-        let results = calcAll();
-        tor.textContent = results[0] + ' m';
-        tod.textContent = results[1] + ' m';
-        roc.textContent = results[2] + ' fpm';
-        time.textContent = results[3] + ' min';
-        distance.textContent = results[4] + ' nm';
-        fuel.textContent = results[5] + ' l';
+        calcAll();
+        tor.textContent = results.getTor() + ' m';
+        tod.textContent = results.getTod() + ' m';
+        roc.textContent = results.getRoc() + ' fpm';
+        time.textContent = results.getTimeToc() + ' min';
+        distance.textContent = results.getDistanceToc() + ' NM';
+        fuel.textContent = results.getFuelToc() + ' l';
     }
     
     function validate(input){

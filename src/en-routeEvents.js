@@ -20,23 +20,21 @@ export const routeCalc = () => {
 
     function calcAll(){
         let values = calcEnroute(qnh.value, cruise.value, isaDev.value, mcp.value, isFL.value);
-        let rpm = values[0];
-        let tas = values[1];  
-        let fuel = values[2];
-        let range = values[3];
-        let endurance = values[4];
 
-        return [rpm, tas, fuel, range, endurance];
+        results.updateRpm(values[0]);
+        results.updateTas(values[1]);
+        results.updateFuelBurn(values[2]);
+        results.updateRange(values[3]);
+        results.updateEndurance(values[4]);
     }
     
     function updateResults(){
-        let values = calcAll();
-        rpm.textContent = values[0];
-        tas.textContent = values[1] + ' kt';
-        fuel.textContent = values[2] + ' l / h';
-        range.textContent = values[3] + ' Nm';
-        endurance.textContent = values[4];
-        results.updateFuelBurn(values[2]);
+        calcAll();
+        rpm.textContent = results.getRpm() + ' rpm';
+        tas.textContent = results.getTas() + ' kt';
+        fuel.textContent = results.getFuelBurn() + ' l/h';
+        range.textContent = results.getRange() + ' NM';
+        endurance.textContent = results.getEndurance() + ' h';
     }
     
     function addInvalid(input, button){

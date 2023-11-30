@@ -6,6 +6,8 @@ import { createResultContainer } from "./wb";
 import { createTitle } from "./wb";
 import { createDropdownInput } from "./wb";
 
+import { results } from "./results";
+
 function createEnroute() {
     const titleContainer = createTitle('Enroute');
 
@@ -26,11 +28,11 @@ function createEnroute() {
     const calculateButton = createCalculateButton();
 
     const tableRows = [
-        { label: 'RPM', id: 'rpm' },
-        { label: 'TAS', id: 'tas' },
-        { label: 'Fuel Burn', id: 'fuel' },
-        { label: 'Range', id: 'range' },
-        { label: 'Endurance', id: 'endurance' }
+        { label: 'RPM', id: 'rpm', result: results.getRpm() + ' rpm'},
+        { label: 'TAS', id: 'tas', result: results.getTas() + ' kt'},
+        { label: 'Fuel Burn', id: 'fuel', result: results.getFuelBurn() + ' l/h'},
+        { label: 'Range', id: 'range', result: results.getRange() + ' NM'},
+        { label: 'Endurance', id: 'endurance', result: results.getEndurance() +  ' h'}
     ];
     
 
@@ -45,6 +47,7 @@ function createEnroute() {
 
     return mainContainer;
 }
+
 function createCruiseGroup() {
     // Create the title div
     const titleDiv = document.createElement('div');
