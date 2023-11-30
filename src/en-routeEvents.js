@@ -1,4 +1,5 @@
 import { calcEnroute, calcPressAltCruise } from "./en-routeCalc.js";
+import { results } from "./results.js";
 
 export const routeCalc = () => {
     const button = document.querySelector('.btn');
@@ -18,7 +19,7 @@ export const routeCalc = () => {
     const variables = Array.from(document.querySelectorAll('.form-control'));
 
     function calcAll(){
-        let values = calcEnroute(qnh.value, cruise.value, isaDev.value, mcp.value);
+        let values = calcEnroute(qnh.value, cruise.value, isaDev.value, mcp.value, isFL.value);
         let rpm = values[0];
         let tas = values[1];  
         let fuel = values[2];
@@ -35,6 +36,7 @@ export const routeCalc = () => {
         fuel.textContent = values[2] + ' l / h';
         range.textContent = values[3] + ' Nm';
         endurance.textContent = values[4];
+        results.updateFuelBurn(values[2]);
     }
     
     function addInvalid(input, button){

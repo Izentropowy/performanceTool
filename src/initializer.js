@@ -14,6 +14,7 @@ import wbCalc from "./wbCalc";
 import { depCalc } from "./departureEvents";
 import { routeCalc } from "./en-routeEvents";
 import { destCalc } from "./destinationEvents";
+import { fuelCalc } from "./fuelEvents";
 
 function createNav() {
     const nav = document.createElement('nav');
@@ -55,7 +56,7 @@ function createNav() {
         { id: "departureButton", text: "Departure", action: () => setActivePage(createDeparture(), depCalc) },
         { id: "enrouteButton", text: "En-Route", action: () => setActivePage(createEnroute(), routeCalc) },
         { id: "destinationButton", text: "Destination", action: () => setActivePage(createDestination(), destCalc) },
-        { id: "fuelButton", text: "Fuel", action: () => setActivePage(createFuel()) }
+        { id: "fuelButton", text: "Fuel", action: () => setActivePage(createFuel(), fuelCalc) }
     ];
 
     buttons.forEach(button => {

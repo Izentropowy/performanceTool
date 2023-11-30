@@ -1,17 +1,17 @@
 export function calcTaxi(time) {
     // avg fuel burn 40l/h
-    let taxiFuel = time / 60 * 40;
+    let taxiFuel = parseFloat(time / 60 * 40);
     return taxiFuel;
 }
 
 export function calcTrip(time, fuelBurn) {
-    let tripFuel = time / 60 * fuelBurn;
+    let tripFuel = parseFloat(time / 60 * fuelBurn);
     return tripFuel;
 }
 
 export function calcContingency(tripFuel, fuelBurn) {
-    let contingency1 = 0.05 * tripFuel;
-    let contingency2 = fuelBurn / 6;
+    let contingency1 = parseFloat(0.05 * tripFuel);
+    let contingency2 = parseFloat(fuelBurn / 6);
 
     let highestContingency = contingency1 > contingency2 ? contingency1 : contingency2;
 
@@ -19,7 +19,7 @@ export function calcContingency(tripFuel, fuelBurn) {
 }
 
 export function calcAlternate(time, fuelBurn) {
-    let alternateFuel = time / 60 * fuelBurn;
+    let alternateFuel = parseFloat(time / 60 * fuelBurn);
     return alternateFuel;
 }
 
