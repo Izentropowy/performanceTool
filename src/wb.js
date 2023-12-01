@@ -110,6 +110,7 @@ export function createInput(title, placeholder, id, min = undefined, max = undef
     input.classList.add('form-control');
     input.id = id;
     input.placeholder = placeholder;
+    input.value = localStorage.getItem(input.id);
 
     // Set min and max attributes if provided
     if (min !== undefined) {

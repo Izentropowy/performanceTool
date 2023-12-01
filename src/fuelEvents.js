@@ -20,6 +20,11 @@ export const fuelCalc = () => {
     
     function calcAll(){
         let fuelBurn = results.getFuelBurn();
+        console.log(fuelBurn);
+        if (fuelBurn === 0) {
+            alert("Using standard fuel burn 35 l / h");
+        }
+
         let taxiResult = calcTaxi(taxi.value);
         let tripResult = calcTrip(destination.value, fuelBurn);
         let contingencyResult = calcContingency(tripResult, fuelBurn);
@@ -45,8 +50,38 @@ export const fuelCalc = () => {
         minimumResult.textContent = results.getMinimum() + ' l';
     }
     
+    function validate(input){
+        if (parseFloat(input.value) < input.min || input.value == ""){
+            input.classList.add("invalid");
+            button.classList.add("shake");
+            return false;
+        }
+
+        input.classList.remove("invalid");
+        return true;
+    }
+    
+    function validateAll(){
+        let validator = true;
+        for (let element of variables) {
+            if (!validate(element)) validator = false;
+        }
+        return validator;
+    }
+    
+    function save_data_to_localstorage(id, value) {
+        localStorage.setItem(id, value);
+    }
+
     button.addEventListener('click', () => {
-        updateResults();
+        if (validateAll()){
+            updateResults();
+        }
+        for (let element of variables) {
+            save_data_to_localstorage(element.id, element.value);
+        }
     });
+
+    button.addEventListener('animationend', () => button.classList.remove("shake"));
 }
 

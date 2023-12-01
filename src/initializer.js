@@ -150,6 +150,7 @@ function setActivePage(page, calc) {
     if (calc) {
         calc();
     }
+
 }
 
 function initializeWebsite() {
@@ -159,6 +160,8 @@ function initializeWebsite() {
         content.appendChild(createMain());
         content.appendChild(createFooter());
 
+        localStorage.clear();
+        
         setActivePage(createHome());
 }
 

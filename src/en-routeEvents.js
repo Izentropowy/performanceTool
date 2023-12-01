@@ -70,9 +70,16 @@ export const routeCalc = () => {
         return validator;
     }
     
+    function save_data_to_localstorage(id, value) {
+        localStorage.setItem(id, value);
+    }
+
     button.addEventListener('click', () => {
         if (validateAll()){
             updateResults();
+        }
+        for (let element of variables) {
+            save_data_to_localstorage(element.id, element.value);
         }
     });
     
