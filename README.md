@@ -1,7 +1,7 @@
 ## **Cessna 172 Performance Tool**
 
 <div align=center>
-<img src='/images/previev.png' alt='project-cover'>
+<img src='/src/assets/images/previev.png' alt='project-cover'>
 </div>
 <hr>
 
