@@ -13,7 +13,7 @@
 
 ## **Installation**
 
->> A live deployment: 
+>> A live deployment: https://izentropowy.github.io/performanceTool/
 
 <br>
 
