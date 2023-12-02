@@ -1,11 +1,18 @@
 export function calcTaxi(time) {
-    // avg fuel burn 40l/h
-    let taxiFuel = parseFloat(time / 60 * 40);
+    // avg fuel burn 35l/h
+    let taxiFuel = parseFloat(time / 60 * 35);
     return taxiFuel.toFixed(2);
 }
 
-export function calcTrip(time, fuelBurn) {
-    let tripFuel = parseFloat(time / 60 * fuelBurn);
+export function calcTrip(time, fuelBurn, timeToc, fuelBurnToc) {
+    let tripFuel;
+    if (timeToc && fuelBurnToc != 0) {
+        tripFuel = parseFloat((time - timeToc) / 60 * fuelBurn) + parseFloat(fuelBurnToc);
+    }
+    else {
+        tripFuel = parseFloat(time / 60 * fuelBurn);
+    }
+
     return tripFuel.toFixed(2);
 }
 

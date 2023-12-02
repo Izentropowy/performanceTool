@@ -61,8 +61,12 @@ const wbCalc = () => {
         moment.textContent = results.getMoment() + ' kgm';
         updateChart(m, w);
     }
-    
+    function save_data_to_localstorage(id, value) {
+        localStorage.setItem(id, value);
+    }
+
     variables.forEach(element => element.addEventListener('change', () => calcResults()));
+    variables.forEach(element => element.addEventListener('change', () => save_data_to_localstorage(element.id, element.value)));
     
     var chart = new Chart(ctx, {
       data: {

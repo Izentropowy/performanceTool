@@ -20,13 +20,16 @@ export const fuelCalc = () => {
     
     function calcAll(){
         let fuelBurn = results.getFuelBurn();
-        console.log(fuelBurn);
+        let timeToc = results.getTimeToc();
+        let fuelBurnToc = results.getFuelToc();
+        
         if (fuelBurn === 0) {
-            alert("Using standard fuel burn 35 l / h");
+            fuelBurn = 35;
+            alert("Using standard fuel burn 35 l / h. Fill out the enroute tab.");
         }
 
         let taxiResult = calcTaxi(taxi.value);
-        let tripResult = calcTrip(destination.value, fuelBurn);
+        let tripResult = calcTrip(destination.value, fuelBurn, timeToc, fuelBurnToc);
         let contingencyResult = calcContingency(tripResult, fuelBurn);
         let alternateResult = calcAlternate(alternate.value, fuelBurn);
         let reserveResult = calcReserve(rules.value, fuelBurn);
@@ -68,7 +71,7 @@ export const fuelCalc = () => {
         }
         return validator;
     }
-    
+
     function save_data_to_localstorage(id, value) {
         localStorage.setItem(id, value);
     }
